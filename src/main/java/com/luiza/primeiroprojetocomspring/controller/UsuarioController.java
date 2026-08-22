@@ -1,20 +1,13 @@
 package com.luiza.primeiroprojetocomspring.controller;
 
 import com.luiza.primeiroprojetocomspring.database.model.UsuarioEntity;
-import com.luiza.primeiroprojetocomspring.database.repository.IUsuarioRepository;
 import com.luiza.primeiroprojetocomspring.dto.UsuarioDto;
 import com.luiza.primeiroprojetocomspring.service.UsuarioService;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.ConcreteProxy;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
