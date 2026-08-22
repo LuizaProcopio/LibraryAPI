@@ -41,6 +41,7 @@ public class UsuarioController {
     public void addUser(@RequestBody UsuarioDto usuarioDto){
         usuarioService.save(usuarioDto);
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable UUID id){
