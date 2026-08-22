@@ -1,12 +1,11 @@
 package com.luiza.primeiroprojetocomspring.database.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
+
 
 
 @Entity
