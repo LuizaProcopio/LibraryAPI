@@ -1,5 +1,6 @@
 package com.luiza.primeiroprojetocomspring.database.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,12 +20,11 @@ public class AutorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Integer id;
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
     private String nacionalidade;
-
 
     @ManyToMany(mappedBy = "autores")
     private Set<LivroEntity> livros = new HashSet<>();
