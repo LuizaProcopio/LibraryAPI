@@ -2,15 +2,12 @@ package com.luiza.primeiroprojetocomspring.controller;
 
 import com.luiza.primeiroprojetocomspring.database.model.AutorEntity;
 import com.luiza.primeiroprojetocomspring.dto.AutorDto;
-import com.luiza.primeiroprojetocomspring.dto.LivroDto;
 import com.luiza.primeiroprojetocomspring.service.AutorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+
 
 @RequestMapping("/autor")
 @RestController
