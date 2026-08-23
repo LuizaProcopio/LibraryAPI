@@ -3,12 +3,10 @@ package com.luiza.primeiroprojetocomspring.service;
 import com.luiza.primeiroprojetocomspring.database.model.UsuarioEntity;
 import com.luiza.primeiroprojetocomspring.database.repository.IUsuarioRepository;
 import com.luiza.primeiroprojetocomspring.dto.UsuarioDto;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -22,7 +20,8 @@ public class UsuarioService {
 
         return UsuarioDto.builder()
                 .nome(usuario.getNome())
-                .email(usuario.getEmail()).build();
+                .email(usuario.getEmail())
+                .build();
     }
 
     public List<UsuarioEntity> findAll(){
