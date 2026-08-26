@@ -1,6 +1,5 @@
 package com.luiza.primeiroprojetocomspring.controller;
 
-import com.luiza.primeiroprojetocomspring.database.model.AutorEntity;
 import com.luiza.primeiroprojetocomspring.dto.AutorDto;
 import com.luiza.primeiroprojetocomspring.service.AutorService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class AutorController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<AutorEntity> findAll(){
+    public List<AutorDto> findAll(){
         return autorService.findAll();
     }
 
@@ -35,7 +34,7 @@ public class AutorController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public AutorDto updateById(@PathVariable Integer id, @RequestBody AutorDto autorDto){
         return autorService.updateById(id, autorDto);
     }
