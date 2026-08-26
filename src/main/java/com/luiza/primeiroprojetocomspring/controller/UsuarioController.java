@@ -1,6 +1,5 @@
 package com.luiza.primeiroprojetocomspring.controller;
 
-import com.luiza.primeiroprojetocomspring.database.model.UsuarioEntity;
 import com.luiza.primeiroprojetocomspring.dto.UsuarioDto;
 import com.luiza.primeiroprojetocomspring.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ public class UsuarioController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UsuarioEntity> findAll(){
+    public List<UsuarioDto> findAll(){
         return usuarioService.findAll();
     }
 
