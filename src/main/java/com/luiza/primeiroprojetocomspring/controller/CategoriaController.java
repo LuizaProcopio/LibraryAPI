@@ -1,6 +1,5 @@
 package com.luiza.primeiroprojetocomspring.controller;
 
-import com.luiza.primeiroprojetocomspring.database.model.CategoriaEntity;
 import com.luiza.primeiroprojetocomspring.dto.CategoriaDto;
 import com.luiza.primeiroprojetocomspring.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class CategoriaController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CategoriaEntity> findAll(){
+    public List<CategoriaDto> findAll(){
         return categoriaService.findAll();
     }
 
