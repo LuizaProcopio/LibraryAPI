@@ -23,58 +23,72 @@ public class CategoriaService {
     public CategoriaDto findById(Integer id){
         CategoriaEntity categoria = categoriaRepository.findById(id).orElseThrow();
 
-        Set<Integer> livrosId = categoria.getLivros()
-                .stream()
-                .map(LivroEntity::getId)
-                .collect(Collectors.toSet());
-
         return CategoriaDto.builder()
+                .id(categoria.getId())
                 .nome(categoria.getNome())
-                .livros(livrosId)
+                .livros(categoria.getLivros().stream()
+                        .map(LivroEntity::getId)
+                        .collect(Collectors.toSet()))
                 .build();
     }
 
-    public List<CategoriaEntity> findAll(){
-        return categoriaRepository.findAll();
+    public List<CategoriaDto> findAll(){
+        return categoriaRepository.findAll().stream()
+                .map(categoria -> CategoriaDto.builder()
+                        .id(categoria.getId())
+                        .nome(categoria.getNome())
+                        .livros(categoria.getLivros().stream()
+                                .map(LivroEntity::getId)
+                                .collect(Collectors.toSet())).build()).toList();
     }
 
-    public void save(CategoriaDto categoriaDto){
-        Set<LivroEntity> livros = new HashSet<>();
+    public CategoriaDto save(CategoriaDto categoriaDto){
+        CategoriaEntity categoria = categoriaRepository.save(CategoriaEntity.builder()
+                .nome(categoriaDto.getNome())
+                .build());
 
-        for (Integer livroId : categoriaDto.getLivros()){
-            LivroEntity livro = livroRepository.findById(livroId).orElseThrow();
-            livros.add(livro);
+        Set<LivroEntity> livros = new HashSet<>();
+        if (categoriaDto.getLivros() != null) {
+            for (Integer livroId : categoriaDto.getLivros()) {
+                LivroEntity livro = livroRepository.findById(livroId).orElseThrow();
+                livro.getCategorias().add(categoria);
+                livros.add(livro);
+            }
+            livroRepository.saveAll(livros);
         }
 
-        CategoriaEntity categoria = categoriaRepository.save(CategoriaEntity.builder()
-                        .nome(categoriaDto.getNome())
-                        .livros(livros)
-                .build());
+        return CategoriaDto.builder()
+                .id(categoria.getId())
+                .nome(categoria.getNome())
+                .livros(livros.stream().map(LivroEntity::getId).collect(Collectors.toSet()))
+                .build();
     }
 
     public CategoriaDto updateById(Integer id, CategoriaDto categoriaDto){
         CategoriaEntity categoria = categoriaRepository.findById(id).orElseThrow();
 
-        Set<LivroEntity> livros = new HashSet<>();
+        for (LivroEntity livroAntigo : categoria.getLivros()) {
+            livroAntigo.getCategorias().remove(categoria);
+        }
+        livroRepository.saveAll(categoria.getLivros());
 
-        for (Integer livroId : categoriaDto.getLivros()) {
-            LivroEntity livro = livroRepository.findById(livroId).orElseThrow();
-            livros.add(livro);
+        Set<LivroEntity> novosLivros = new HashSet<>();
+        if (categoriaDto.getLivros() != null) {
+            for (Integer livroId : categoriaDto.getLivros()) {
+                LivroEntity livro = livroRepository.findById(livroId).orElseThrow();
+                livro.getCategorias().add(categoria);
+                novosLivros.add(livro);
+            }
+            livroRepository.saveAll(novosLivros);
         }
 
         categoria.setNome(categoriaDto.getNome());
-        categoria.setLivros(livros);
-
         categoriaRepository.save(categoria);
 
-        Set<Integer> livrosId = categoria.getLivros()
-                .stream()
-                .map(LivroEntity::getId)
-                .collect(Collectors.toSet());
-
         return CategoriaDto.builder()
+                .id(categoria.getId())
                 .nome(categoria.getNome())
-                .livros(livrosId)
+                .livros(novosLivros.stream().map(LivroEntity::getId).collect(Collectors.toSet()))
                 .build();
     }
 
