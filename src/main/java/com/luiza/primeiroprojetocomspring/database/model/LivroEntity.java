@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 
 @Entity
@@ -19,7 +18,7 @@ public class LivroEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Integer id;
     @Column(nullable = false)
     private String titulo;
     @Column(nullable = false)
@@ -30,16 +29,15 @@ public class LivroEntity {
     private Integer quantidadeDisponivel;
 
     @ManyToMany
-    @JoinTable(
+        @JoinTable(
             name = "autores_livros",
             joinColumns = @JoinColumn(name = "livro_id"),
             inverseJoinColumns = @JoinColumn(name = "autor_id")
     )
     private Set<AutorEntity> autores = new HashSet<>();
 
-
     @ManyToMany
-    @JoinTable(
+        @JoinTable(
             name = "livros_categorias",
             joinColumns = @JoinColumn(name = "livro_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
