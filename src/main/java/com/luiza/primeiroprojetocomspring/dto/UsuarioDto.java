@@ -1,7 +1,10 @@
 package com.luiza.primeiroprojetocomspring.dto;
 
-import com.luiza.primeiroprojetocomspring.database.model.EmprestimoEntity;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -10,7 +13,9 @@ import lombok.*;
 @Builder
 public class UsuarioDto {
 
+    private UUID id;
     private String nome;
     private String email;
-    private EmprestimoEntity emprestimos;
+    @Builder.Default
+    private Set<Integer> emprestimos = new HashSet<>();
 }
