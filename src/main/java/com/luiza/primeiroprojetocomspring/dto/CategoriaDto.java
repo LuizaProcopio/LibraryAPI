@@ -12,8 +12,9 @@ import java.util.Set;
 @Builder
 public class CategoriaDto {
 
+    private Integer id;
     private String nome;
-    @Builder.Default /* Se ninguém informar um valor para esse atributo, use o valor padrão que eu defini aqui. */
+    @Builder.Default
     private Set<Integer> livros = new HashSet<>();
 
 }
