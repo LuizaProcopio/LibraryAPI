@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "emprestimo")
@@ -17,7 +16,7 @@ public class EmprestimoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Integer id;
     @Column(name = "data_emprestimo", nullable = false)
     private LocalDateTime dataEmprestimo;
     @Column(name = "data_devolucao", nullable = false)
